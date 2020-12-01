@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSeeAttestations"
+            style="@style/AppTheme.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voir les attestations" />
+
+        <Button
+            android:id="@+id/btnDefineProfile"
+            style="@style/AppTheme.Button.BorderLess.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Défnir le profil" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Heure de sortie" />
+
+        <include
+            android:id="@+id/usingDateSelector"
+            layout="@layout/view_hour_selector" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Heure de création" />
+
+        <include
+            android:id="@+id/createDateSelector"
+            layout="@layout/view_hour_selector" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Lieux de confinement" />
+
+        <RadioGroup
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/place_selector"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_new_place"
+            style="@style/AppTheme.Button.BorderLess.Colored"
+            android:text="Nouveau"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Motif" />
+
+        <RadioGroup
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reason_selector"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_generate"
+            android:text="Générer l'attestation"
+            style="@style/AppTheme.Button.Colored"/>
+
+    </LinearLayout>
+</ScrollView>
