@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -47,11 +48,17 @@ public class PdfGenerator {
 
         ParcelFileDescriptor mFileDescriptor = ParcelFileDescriptor
                 .open(tmp, ParcelFileDescriptor.MODE_READ_ONLY);
+
+
+        Log.i("PdfGenerator","generate ");
+
         if (mFileDescriptor != null) {
             PdfRenderer pdfRenderer = new PdfRenderer(mFileDescriptor);
             PdfDocument document = new PdfDocument();
 
             PdfRenderer.Page pageIn = pdfRenderer.openPage(0);
+
+            Log.i("PdfGenerator","generate : origin page w : "+pageIn.getWidth()+" h : "+pageIn.getHeight());
 
             PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo
                     .Builder(pageIn.getWidth()*scale, pageIn.getHeight()*scale, 1).create();
@@ -79,8 +86,8 @@ public class PdfGenerator {
 
     private File buildTemporaryFile(Context context) throws IOException {
         File tmp = new File(context.getFilesDir(), "tmp.pdf");
-        BufferedInputStream in = null;
-        FileOutputStream output = null;
+        BufferedInputStream in;
+        FileOutputStream output;
         try {
             in = new BufferedInputStream(context.getResources().openRawResource(PDF_RESOURCE));
             output = new FileOutputStream(tmp);
@@ -99,6 +106,7 @@ public class PdfGenerator {
         return tmp;
     }
 
+    /*
     public PdfDocument generate2(Context context, AttestationData data) throws IOException, WriterException {
         File tmp = buildTemporaryFile(context);
 
@@ -132,7 +140,9 @@ public class PdfGenerator {
         return null;
 
     }
+    */
 
+/*
     private void drawAttestationData(Context context, PdfDocument.Page page,
                                      AttestationData data, int pageWidth, int pageHeight) throws WriterException {
         Canvas canvas = page.getCanvas();
@@ -163,7 +173,7 @@ public class PdfGenerator {
         Bitmap qrCode = qrgEncoder.encodeAsBitmap();
         canvas.drawBitmap(qrCode, pageWidth - 156, pageHeight-25-QRdimension, null);
     }
-
+*/
     private void drawAttestationData(Context context, PdfDocument.Page page,
                                      Attestation attestation, int pageWidth, int pageHeight)
             throws WriterException {
@@ -176,37 +186,37 @@ public class PdfGenerator {
 
         Profile profile = attestation.getProfile();
         canvas.drawText(profile.getFirstName() + " " + profile.getLastName(),
-                119*scale, pageHeight-696*scale, paint);
-        canvas.drawText(attestation.getBirthdayString(), 119*scale, pageHeight-674*scale, paint);
-        canvas.drawText(profile.getPlaceOfBirth(), 297*scale, pageHeight-674*scale, paint);
+                92*scale, pageHeight-702*scale, paint);
+        canvas.drawText(attestation.getBirthdayString(), 92*scale, pageHeight-684*scale, paint);
+        canvas.drawText(profile.getPlaceOfBirth(), 214*scale, pageHeight-684*scale, paint);
 
         Place place = attestation.getPlace();
         canvas.drawText(place.getAddress() + " " + place.getZipCode() + " " + place.getCity(),
-                133*scale, pageHeight-652*scale, paint);
+                104*scale, pageHeight-665*scale, paint);
 
-        paint.setTextSize(18*scale);
-        canvas.drawText("x", 84*scale,
+        paint.setTextSize(12*scale);
+        canvas.drawText("x", 47*scale,
                 pageHeight-reasons_y[attestation.getReason().ordinal()]*scale, paint);
 
         paint.setTextSize(11*scale);
-        canvas.drawText(place.getCity(), 105*scale, pageHeight-177*scale, paint);
-        canvas.drawText(attestation.getUsingDay(), 91*scale, pageHeight-153*scale, paint);
-        canvas.drawText(attestation.getUsingHour(), 264*scale, pageHeight-153*scale, paint);
+        canvas.drawText(place.getCity(), 78*scale, pageHeight-76*scale, paint);
+        canvas.drawText(attestation.getUsingDay(), 63*scale, pageHeight-58*scale, paint);
+        canvas.drawText(attestation.getUsingHour(), 227*scale, pageHeight-58*scale, paint);
 
         // QR code
         final int QRdimension = 92*scale;
         QRGEncoder qrgEncoder = new QRGEncoder(attestation.buildQRData(), null, QRGContents.Type.TEXT,
                 QRdimension);
         Bitmap qrCode = qrgEncoder.encodeAsBitmap();
-        canvas.drawBitmap(qrCode, pageWidth - 156*scale, pageHeight-100*scale-QRdimension, null);
+        canvas.drawBitmap(qrCode, pageWidth - 156*scale, pageHeight-25*scale-QRdimension, null);
     }
 
 
     public Bitmap test(Context context) throws IOException {
 
         File tmp = new File(context.getFilesDir(), "tmp.pdf");
-        BufferedInputStream in = null;
-        FileOutputStream output = null;
+        BufferedInputStream in;
+        FileOutputStream output;
         try {
             in = new BufferedInputStream(context.getResources().openRawResource(PDF_RESOURCE));
             output = new FileOutputStream(tmp);

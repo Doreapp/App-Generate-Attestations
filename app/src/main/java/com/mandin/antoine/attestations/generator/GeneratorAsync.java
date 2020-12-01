@@ -27,14 +27,12 @@ public class GeneratorAsync extends AsyncTask<Context, Void, Pair<Bitmap, PdfDoc
     @Override
     protected Pair<Bitmap, PdfDocument> doInBackground(Context... contexts) {
         PdfGenerator generator = new PdfGenerator();
-        PdfDocument document = null;
+        PdfDocument document;
         try {
             document = generator.generate(contexts[0],attestation);
             generator.write(contexts[0], document);
-            return new Pair<Bitmap, PdfDocument>(generator.readResult(contexts[0]), document);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (WriterException e) {
+            return new Pair<>(generator.readResult(contexts[0]), document);
+        } catch (IOException | WriterException e) {
             e.printStackTrace();
         }
         return null;
