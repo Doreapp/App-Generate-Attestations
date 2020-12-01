@@ -1,14 +1,13 @@
 package com.mandin.antoine.attestations.generator;
 
-import android.graphics.Rect;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class AttestationData {
-    public enum Reason {travail, achats, sante, famille, handicap, sport_animaux, convocation, missions, enfants};
     private Date creationDate;
+
+    ;
     private Date usingDate;
     private String lastName;
     private String firstName;
@@ -18,8 +17,10 @@ public class AttestationData {
     private String zipCode;
     private String city;
     private Reason reason;
+    public AttestationData() {
+    }
 
-    public static AttestationData sample(){
+    public static AttestationData sample() {
         AttestationData data = new AttestationData();
         data.setCreationDate(new Date(System.currentTimeMillis()));
         data.setUsingDate(new Date(System.currentTimeMillis()));
@@ -32,9 +33,6 @@ public class AttestationData {
         data.setCity("St. léger les vignes");
         data.setReason(Reason.achats);
         return data;
-    }
-
-    public AttestationData() {
     }
 
     public Date getCreationDate() {
@@ -117,33 +115,36 @@ public class AttestationData {
         this.reason = reason;
     }
 
-    public String getBirthdayString(){
+    public String getBirthdayString() {
         return new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH).format(birthday);
     }
 
-    public String getOutHour(){
+    public String getOutHour() {
         return new SimpleDateFormat("HH:mm", Locale.FRENCH).format(usingDate);
     }
 
-    public String getOutDay(){
+    public String getOutDay() {
         return new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH).format(usingDate);
     }
 
-    public String buildQRData(){
+    public String buildQRData() {
         final SimpleDateFormat dayFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
         final SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
-        return "Cree le: "+dayFormat.format(creationDate)+" a "+hourFormat.format(creationDate).replace(":","h")+
-                ";\n "+
-                "Nom: "+lastName+
-                ";\n "+
-                "Prenom: "+firstName+
-                ";\n "+
-                "Naissance: "+dayFormat.format(birthday)+" a "+placeOfBirth+
-                ";\n "+
-                "Adresse: "+address+" "+zipCode+" "+city+
-                ";\n "+
-                "Sortie: "+dayFormat.format(usingDate)+" a "+hourFormat.format(usingDate)+
-                ";\n "+
-                "Motifs: "+reason.toString();
+        return "Cree le: " + dayFormat.format(creationDate) + " a " + hourFormat.format(creationDate).replace(":", "h") +
+                ";\n " +
+                "Nom: " + lastName +
+                ";\n " +
+                "Prenom: " + firstName +
+                ";\n " +
+                "Naissance: " + dayFormat.format(birthday) + " a " + placeOfBirth +
+                ";\n " +
+                "Adresse: " + address + " " + zipCode + " " + city +
+                ";\n " +
+                "Sortie: " + dayFormat.format(usingDate) + " a " + hourFormat.format(usingDate) +
+                ";\n " +
+                "Motifs: " + reason.toString()
+                + ";\n"; //They added that
     }
+
+    public enum Reason {travail, achats, sante, famille, handicap, sport_animaux, convocation, missions, enfants}
 }
