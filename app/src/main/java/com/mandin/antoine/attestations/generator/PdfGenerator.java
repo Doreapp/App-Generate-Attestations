@@ -30,16 +30,17 @@ import androidmads.library.qrgenearator.QRGEncoder;
 public class PdfGenerator {
     private static final int scale = 3;
     private static final int[] reasons_y = {
-            578,
-            533,
-            477,
-            435,
-            396,
-            358,
-            295,
+            488,
+            417,
+            347,
+            325,
+            291,
+            269,
+            199,
             255,
-            211
+            157
     };
+    private static final int PDF_RESOURCE = R.raw.certificate2;
 
     public PdfDocument generate(Context context, Attestation attestation) throws IOException, WriterException {
         File tmp = buildTemporaryFile(context);
@@ -81,7 +82,7 @@ public class PdfGenerator {
         BufferedInputStream in = null;
         FileOutputStream output = null;
         try {
-            in = new BufferedInputStream(context.getResources().openRawResource(R.raw.certificate));
+            in = new BufferedInputStream(context.getResources().openRawResource(PDF_RESOURCE));
             output = new FileOutputStream(tmp);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -207,7 +208,7 @@ public class PdfGenerator {
         BufferedInputStream in = null;
         FileOutputStream output = null;
         try {
-            in = new BufferedInputStream(context.getResources().openRawResource(R.raw.certificate));
+            in = new BufferedInputStream(context.getResources().openRawResource(PDF_RESOURCE));
             output = new FileOutputStream(tmp);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
