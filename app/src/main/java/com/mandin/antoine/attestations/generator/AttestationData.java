@@ -8,8 +8,6 @@ import java.util.Locale;
 
 public class AttestationData {
     private Date creationDate;
-
-    ;
     private Date usingDate;
     private String lastName;
     private String firstName;
@@ -19,6 +17,7 @@ public class AttestationData {
     private String zipCode;
     private String city;
     private Reason reason;
+
     public AttestationData() {
     }
 
