@@ -1,5 +1,7 @@
 package com.mandin.antoine.attestations.generator;
 
+import com.mandin.antoine.attestations.model.Reason;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,7 +33,7 @@ public class AttestationData {
         data.setAddress("5 rue du moulin");
         data.setZipCode("44710");
         data.setCity("St. léger les vignes");
-        data.setReason(Reason.achats);
+        data.setReason(Reason.achats_culturel_cultuel);
         return data;
     }
 
@@ -145,6 +147,4 @@ public class AttestationData {
                 "Motifs: " + reason.toString()
                 + ";\n"; //They added that
     }
-
-    public enum Reason {travail, achats, sante, famille, handicap, sport_animaux, convocation, missions, enfants}
 }
