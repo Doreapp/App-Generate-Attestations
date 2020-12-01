@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Attestations</string>
+    <string name="back">Retour</string>
+    <string name="qr_code">QR Code</string>
 </resources>

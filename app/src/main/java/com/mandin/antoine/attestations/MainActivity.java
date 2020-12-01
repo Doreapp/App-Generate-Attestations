@@ -1,10 +1,7 @@
 package com.mandin.antoine.attestations;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -65,24 +62,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnDefineProfile:
-                new DialogProfile(this, new Service(this).getMainProfile())
-                        .show();
-                break;
-            case R.id.btnSeeAttestations:
-                navigateToAttestations();
-                break;
-            case R.id.btn_generate:
-                generateAttestation();
-                break;
-            case R.id.btn_new_place:
-                new DialogPlace(this, null)
-                        .setOnValidateListener(this)
-                        .show();
-                break;
-        }
+        final int viewId = v.getId();
+        if (viewId == R.id.btnDefineProfile)
+            new DialogProfile(this, new Service(this).getMainProfile())
+                    .show();
+        else if (viewId == R.id.btnSeeAttestations)
+            navigateToAttestations();
+
+        else if (viewId == R.id.btn_generate)
+            generateAttestation();
+
+        else if (viewId == R.id.btn_new_place)
+            new DialogPlace(this, null)
+                    .setOnValidateListener(this)
+                    .show();
     }
+
+
 
     private void createAdaptiveAttestation() {
         Profile profile = new Service(this).getMainProfile();
