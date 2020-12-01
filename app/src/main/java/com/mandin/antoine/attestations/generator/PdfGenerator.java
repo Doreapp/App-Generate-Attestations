@@ -30,17 +30,17 @@ import androidmads.library.qrgenearator.QRGEncoder;
 public class PdfGenerator {
     private static final int scale = 3;
     private static final int[] reasons_y = {
-            488,
-            417,
-            347,
-            325,
-            291,
-            269,
-            199,
-            255,
-            157
+            553, //travail
+            482, //achats
+            434, //sante
+            410, //famille
+            373, //handicap
+            349, //sport_animaux
+            276, //convocation
+            252, //missions
+            228 //enfants
     };
-    private static final int PDF_RESOURCE = R.raw.certificate2;
+    private static final int PDF_RESOURCE = R.raw.certificate3;
 
     public PdfDocument generate(Context context, Attestation attestation) throws IOException, WriterException {
         File tmp = buildTemporaryFile(context);
@@ -142,26 +142,26 @@ public class PdfGenerator {
         paint.setTypeface(plain);
         paint.setTextSize(11);
         // Name + last name
-        canvas.drawText(data.getFirstName() + " " + data.getLastName(), 119, pageHeight-696, paint);
-        canvas.drawText(data.getBirthdayString(), 119, pageHeight-674, paint);
-        canvas.drawText(data.getPlaceOfBirth(), 297, pageHeight-674, paint);
+        canvas.drawText(data.getFirstName() + " " + data.getLastName(), 92, pageHeight-702, paint);
+        canvas.drawText(data.getBirthdayString(), 92, pageHeight-684, paint);
+        canvas.drawText(data.getPlaceOfBirth(), 214, pageHeight-684, paint);
         canvas.drawText(data.getAddress() + " " + data.getZipCode() + " " + data.getCity(),
-                133, pageHeight-652, paint);
+                104, pageHeight-665, paint);
 
-        paint.setTextSize(18);
-        canvas.drawText("x", 84, pageHeight-reasons_y[data.getReason().ordinal()], paint);
+        paint.setTextSize(12);
+        canvas.drawText("x", 47, pageHeight-reasons_y[data.getReason().ordinal()], paint);
 
         paint.setTextSize(11);
-        canvas.drawText(data.getCity(), 105, pageHeight-177, paint);
-        canvas.drawText(data.getOutDay(), 91, pageHeight-153, paint);
-        canvas.drawText(data.getOutHour(), 264, pageHeight-153, paint);
+        canvas.drawText(data.getCity(), 78, pageHeight-76, paint);
+        canvas.drawText(data.getOutDay(), 63, pageHeight-58, paint);
+        canvas.drawText(data.getOutHour(), 227, pageHeight-58, paint);
 
         // QR code
         final int QRdimension = 92;
         QRGEncoder qrgEncoder = new QRGEncoder(data.buildQRData(), null, QRGContents.Type.TEXT,
                 QRdimension);
         Bitmap qrCode = qrgEncoder.encodeAsBitmap();
-        canvas.drawBitmap(qrCode, pageWidth - 156, pageHeight-100-QRdimension, null);
+        canvas.drawBitmap(qrCode, pageWidth - 156, pageHeight-25-QRdimension, null);
     }
 
     private void drawAttestationData(Context context, PdfDocument.Page page,

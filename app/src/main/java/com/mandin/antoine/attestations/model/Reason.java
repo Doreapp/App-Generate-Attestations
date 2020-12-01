@@ -2,7 +2,7 @@ package com.mandin.antoine.attestations.model;
 
 public enum Reason {
     travail,
-    achats,
+    achats_culturel_cultuel,
     sante,
     famille,
     handicap,
